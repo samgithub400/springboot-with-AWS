@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ios.exception.UserNotFoundException;
 import com.ios.model.User;
+import com.ios.notes.GetValuesFromApplicationPropertiesFile;
 import com.ios.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,18 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-
+	
+	@Autowired
+	private GetValuesFromApplicationPropertiesFile getData;
+	
+	
+//print the values as a log from application.properties file
+	@GetMapping("/printlog")
+	public String printLog() {
+		getData.printingAsLog();
+		return "Please Check The Console..!";
+	}
+	
 	// create user api
 	@PostMapping("/saveuser")
 	public User createUser(@RequestBody User user) {
@@ -44,18 +56,21 @@ public class UserController {
 	// get user by id api
 	@GetMapping("/getuserbyid/{userId}")
 	public User getUserById(@PathVariable("userId") long userId) throws UserNotFoundException {
+		log.info("get user call started with userId:{}",userId);
 		return userService.getUserById(userId);
 	}
 
 	// update user api
 	@PutMapping("/updateuser/{userId}")
 	public User updateUser(@RequestBody User user, @PathVariable("userId") long userId) throws UserNotFoundException {
+		log.info("Update user call started..");
 		return userService.updateUser(user, userId);
 	}
 
 	// delete user api
 	@DeleteMapping("/deleteuser/{userId}")
 	public ResponseEntity<Object> deleteUser(@PathVariable("userId") long userId) throws UserNotFoundException {
+		log.info("Delete User call stared..");
 		return userService.deleteUser(userId);
 	}
 }
