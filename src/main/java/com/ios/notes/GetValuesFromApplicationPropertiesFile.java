@@ -35,17 +35,41 @@ public class GetValuesFromApplicationPropertiesFile {
 	@Value("${integerSet}")
 	private Set<Integer> integerSet;
 	// this way we can get the data into the set from application.properties file.
-
-	// applicaton.properties value : booleanValue=true
-	@Value("${booleanValue}")
+	
+	
+/*
+ * applicaton.properties value : booleanValue=true
+ * 
+ * this way we can assign default value
+ * 
+ * */	
+	
+	@Value("${booleanValue : true}") 
 	private boolean booleanValue;
 	// this way we can get the boolean value from the application.properties value.
 
+ 
+	/*
+	 * 
+	 * 
+	 * Getting Conditional value
+	 * 
+	 * */
+	@Value("#{ '${stringValue1}' == 'XYZ' ? 'True Condition' : 'False Condition'}")
+	private String stringValue1;
+	
+	@Value("#{ '${stringValue1}' == '${stringValue2}' ? 'True Condition' : 'False Condition'}")
+	private String stringValue2;
+	
+	
 	public void printingAsLog() {
 		log.info("* Map Values : {}", mapValue);
 		log.info("* Integer Values Array : {}", integerArray);
 		log.info("* Integer Values List : {}", integerList);
 		log.info("* Integer Values Set : {}", integerSet);
-		log.info("* Boolean Value : {}", booleanValue);
+		log.info("* Default Boolean Value : {}", booleanValue);
+		log.info("* Getting Conditional String Value 1 : {}", stringValue1);
+		log.info("* Getting Conditional String Value 2 : {}", stringValue2);
+
 	}
 }
