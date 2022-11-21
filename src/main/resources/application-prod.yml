@@ -1,0 +1,26 @@
+spring:
+   datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/springbootwithaws
+      username: root
+      password: root
+
+   jpa:
+      properties:
+         hibernate: 
+            dialect: org.hibernate.dialect.MySQLDialect
+   jpa: 
+      hibernate: 
+         ddl-auto: update
+   jpa:
+      show-sql: true
+
+#this is for data to get in to the java class where it is needed and this is for demo purpose
+mapValue: '{"ABC":"1","cbd":"2","xyd":"3","ppq":"4","AAA":"5"}'
+integerValue: 1,2,3,4,5,6,7,8,9
+integerList: 11,22,33,44,55,66,77,88,99
+integerSet: 12,23,34,45,67,78,89,90
+booleanValue:
+stringValue1: ABCDEF
+stringValue2: ABCDEF
+
